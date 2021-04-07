@@ -1,0 +1,120 @@
+gitpush时出现timeout问题,
+通过SwitchHosts进行IP地址修改
+最后通过 git push --- 分支名
+
+运行powershell,切换到cd desktop
+创建一个新的vue工程
+vue create jingdong 
+初始化配置,Manually select features
+选中babel
+Router
+Vuex
+CSS Pre-processors
+Linter/Formatter
+下一步
+3.xVUE版本
+不选用旧版本的Router
+选用dart-sass
+使用标准的eslint配置
+ESlint + Standard config
+每一次保存都做单独的lint校验
+Lint on save
+把ESlint文件放入一个单独的文件里
+把他不保存成一个future
+
+下载两个插件eslint如果语法不规范会进行代码上的校验,
+Vetur识别Vue中的语法
+node_modules存储的是第三方的依赖模块
+可以通过npm install 下载
+.editorconfig是浏览器的默认配置
+npm run serve 启动工程
+assets放的是一些静态的文件
+components放的是一些功能性组件
+views放的是页面级别的文件
+删除掉views和components里面的内容
+去除相同的html文件在不同的html中的内容，
+要先下载normalize.css npm install --save
+
+背景色可以用f1f1f1
+home cart order
+BEM命名方法 __表示某个元素是某个元素的子元素
+scss文件可以用&__item来表示子元素
+图片的高宽比
+避免因网络较慢引起图片加载缓慢问题
+避免抖动使用hack(防抖)
+ESlintrc需要加rules才可以忽略空格
+"indent": ["off", 2],
+"space-before-function-paren": 0
+vue有时候会报错因为template中只允许有一个根节点
+Vue会默认开启严格模式
+需要在rules下关闭相应的功能
+要增加代码的可维护性,就需要拆分相关的组件
+由于创建时,使用了标准的VUE配置，比较严格ESLINT代码规范
+删掉eslintrc.js目录下的@vue/standard即可去除空格报错问题
+scoped限制我们css的作用范围,避免组件的相互影响,下载vue dev插件
+
+V-for循环理解
+在script标签中定义一个setup函数,
+然后在定义一个数组
+在template模板标签中使用v-for (item,index) in xxx
+下面可以使用差值表达式等方式循环数组的内容{{item.text}}
+v-html更新元素的html 如果是html标签里的属性,则不需要使用花括号
+v-html="item.icon" 循环还需要加key值 :key="innerIndex"
+
+路由跳转,路由权限校验
+每一个路由项目都有一个beforeEnter这样的一个函数在进入路由之前可以
+执行beforeEnter(to,from,next){
+   解构赋值+三元表达式
+   const {isLogin } = localStorage;
+   isLogin ? next({name:'Home'}):next()
+}
+
+router.beforeEach((to,from,next)=>{
+    在路由每次切换的时候可以执行
+    const { isLogin } = localStorage;
+    (isLogin || to.name === "Login")?next():next({name:'Login'})
+})
+
+vue-router提供了一个 userRouter的方法
+我们可以通过
+import { useRouter } from 'vue-router';
+引入
+我们可以通过路由实例的push方法跳转到下一个页面
+setup(){
+   const router = useRouter();
+   const handleLogin = ()=>{
+       localStorage.isLogin = true;
+       router.push({name:'Home'})
+   }
+}
+
+像登陆这种功能一般是要与后端的接口做交互的
+fastmock(前端调接口与后端做交互)
+安装axios插件
+
+通过给账号和密码设置v-model双向绑定的请求
+通过vue插件引入reavtive 使得用户在输入密码时即可获得用户输入的数据
+const data = reactive({
+    name:'',
+    password:''
+})
+data.name
+data.password
+OC语法?
+
+把request.js封装====>创建一个peomise对象,在里面发送一个AJAX的请求
+通过axios发送请求
+axios.post(url,data{
+    baseURL:,
+    headers:{'Content - Type':'application/json'}
+}).then(response)=>{
+    resolve(response.data)
+}
+为了解决当访问首页时,出现同时加载Login,Register等多个路由,
+造成首页打开过慢,我们可以使用异步组件的方式,也就是动态路由
+来控制页面的加载
+动态路由,异步路由,组件的拆分与复用
+
+写布局时,尽量由里向外面去撑布局
+如果出现裂图的问题，可以通过给组件添加 v-show="item.imgUrl"来避免这种情况的发生
+因为没有数据就不会展示
