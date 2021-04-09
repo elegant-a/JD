@@ -23,7 +23,6 @@ import Content from './Content'
 import Cart from './Cart'
 
 // 获取当前商铺信息
-
 const useShopInfoEffect = () => {
     const route = useRoute()
     const data = reactive({item:{}})
@@ -47,9 +46,8 @@ const useBackRouterEffect = () => {
 
 export default {
     name:'Shop',
-    components:{ ShopInfo,Content,Cart },
+    components:{ ShopInfo,Content,Cart},
     setup(){
-        
         const { item,getItemData } = useShopInfoEffect()
         const handleBackClick = useBackRouterEffect()
         getItemData()
@@ -57,7 +55,6 @@ export default {
     }
 }
 </script>
-
 <style lang="scss">
 @import '../../style/viriavles.scss';
 .wrapper1{

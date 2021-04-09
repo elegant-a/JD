@@ -13,7 +13,7 @@ export const get = (url,params = {}) => {
             reject(err)
         })
     })
- }
+}
  export const post = (url,data = {}) => {
     return new Promise((resolve,reject)=>{
         instance.post(url,data,{
