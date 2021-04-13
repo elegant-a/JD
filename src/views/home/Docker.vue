@@ -4,8 +4,11 @@
   :class="{'docker__item':true,'docker__item--active':index === 0}"
   class="docker__item" 
   :key="item.icon">
+      <router-link :to="item.to">
       <div class="iconfont" v-html="item.icon"></div>
-      <div class="docker__title">{{item.text}}</div></span>
+      <div class="docker__title">{{item.text}}</div>
+      </router-link>
+      </span>
   </div>
 </template>
 
@@ -14,15 +17,15 @@ export default {
     name:'Docker',
     setup(){
       const dockerList = [
-          {icon:'&#xe60b',text:'首页'},
-          {icon:'&#xe607',text:'购物车'},
-          {icon:'&#xe60a',text:'订单'},
-          {icon:'&#xe660',text:'我的'}
+          {icon:'&#xe60b',text:'首页',to:{name:'Home'}},
+          {icon:'&#xe607',text:'购物车',to:{name:'CartList'}},
+          {icon:'&#xe60a',text:'订单',to:{name:'Home'}},
+          {icon:'&#xe660',text:'我的',to:{name:'Home'}}
       ]
       return { dockerList }
     }
 }
-</script>
+</script> 
 
 <style lang="scss" scoped>
 @import '../../style/viriavles.scss';
@@ -45,8 +48,15 @@ export default {
       margin: 0.07rem 0 0.02rem 0;
       font-size:.18rem;
 }
+a{
+  color: $content-fontcolor;
+  text-decoration: none;
+}
 &--active{
-  color: #1FA4FC;
+  a{
+      color: #1FA4FC;
+  }
+  
 }
   }
   &__title{
