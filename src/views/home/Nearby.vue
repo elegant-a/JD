@@ -21,8 +21,6 @@ const useNearbyListEffect = () => {
         console.log(result)
         if(result?.errno === 0 && result?.data?.length){
              nearbyList.value = result.data;
-        }else{
-           showToast('登陆失败')
         }
         }
         return {nearbyList,getNearbyList}

@@ -8,8 +8,12 @@ localStorage.cartList = cartListString
 }
 // 可以把全局的数据存到store的index里面
 const getLocalCartList = ()=>{
-  // {shopId:{shopName:'',productList:{productId；{}}}}
-  return JSON.parse(localStorage.cartList) || {}
+  try{
+    return JSON.parse(localStorage.cartList) || {}
+  }catch(e){
+    return{}
+  }
+  
 }
 export default createStore({
   state: {
@@ -67,6 +71,9 @@ export default createStore({
      shopInfo.shopName = shopName
      state.cartList[shopId] = shopInfo
      setLoaclCartList(state);
+    },
+    clearCartData(state,shopId){
+         state.cartList[shopId].productList = {}
     }
     
   },

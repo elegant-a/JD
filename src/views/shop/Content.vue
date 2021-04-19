@@ -25,14 +25,14 @@
         </div>
         <div class="product__number">
           <span
-            class="product__number__minus"
+            class="product__number__minus iconfont"
             @click="()=>{changeCartItem(shopId,item._id,item,-1,shopName)}"
-          >-</span>
+          >&#xe90a;</span>
           {{getProductCartCount(shopId,item._id)}}
           <span
-            class="product__number__plus"
+            class="product__number__plus iconfont"
             @click="()=>{changeCartItem(shopId,item._id,item,1,shopName)}"
-          >+</span>
+          >&#xe92c;</span>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@ import { get } from "../../utils/request";
 import { reactive, toRefs, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { useCommonCartEffect } from "./commonCartEffect";
+import { useCommonCartEffect } from "../../effects/cartEffect";
 
 const categories = [
   { name: "全部商品", tab: "all" },
@@ -138,7 +138,7 @@ export default {
     list-style: none;
     line-height: 0.4rem;
     text-align: center;
-    font-size: 14px;
+    font-size: .14rem;
     color: $content-fontcolor;
     &--active {
       background: $bgColor;
@@ -196,25 +196,15 @@ export default {
     position: absolute;
     right: 0rem;
     bottom: 0.12rem;
-    &__minus,
-    &__plus {
-      display: inline-block;
-      width: 0.2rem;
-      height: 0.2rem;
-      line-height: 0.16rem;
-      border-radius: 50%;
-      border: 0.01rem solid $medium-fontColor;
-      font-size: 0.2rem;
-      text-align: center;
-    }
+    line-height: .18rem;
     &__minus {
-      border: 0.01rem solid $medium-fontColor;
+      position: relative;
+      
       color: $medium-fontColor;
       margin-right: 0.05rem;
     }
     &__plus {
-      background: $btn-bgColor;
-      color: $bgColor;
+      color: $btn-bgColor;
       margin-left: 0.05rem;
     }
   }

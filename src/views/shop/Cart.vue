@@ -1,5 +1,6 @@
 <template>
-<div class="mask" v-if="showCart && calculations.total > 0" 
+<div>
+    <div class="mask" v-if="showCart && calculations.total > 0" 
    @click="handleCartShowChange"></div>
     <div class="cart">
     <div class="container">
@@ -15,8 +16,8 @@
          <div class="product__header__clear"
          ><span class="product__header__clear__btn" @click="()=>cleanCartProducts(shopId)" >清空购物车</span></div>
             </div>
-         <template  v-for="(item) in productList" :key="item._id">
-             <div class="product__item" v-if="item.count  > 0">
+
+             <div class="product__item"  v-for="(item) in productList" :key="item._id" >
             <span 
             class="product__item__checked iconfont"
             v-html="item.check ?'&#xe652;':'&#xe619;'"
@@ -32,15 +33,15 @@
                 </p>
             </div>
                 <div class="product__number">
-               <span class="product__number__minus"
-                @click="()=>{changeCartItemInfo(shopId,item._id,item,-1)}">-</span>
+               <span class="product__number__minus iconfont"
+                @click="()=>{changeCartItemInfo(shopId,item._id,item,-1)}">&#xe90a;</span>
                {{item.count || 0}}
-               <span class="product__number__plus"
+               <span class=" product__number__plus iconfont"
                @click="()=>{changeCartItemInfo(shopId,item._id,item,1)}"
-               >+</span>
+               >&#xe92c;</span>
                 </div>
              </div>
-        </template>   
+
     </div>  
      <div class="check">
          <div class="check__icon">
@@ -51,7 +52,7 @@
          <div class="check__info" @click="handleCartShowChange">
         总计: <span class="check__info__price">&yen; {{calculations.price}}</span>
          </div>
-          <div class="check__btn">
+          <div class="check__btn" v-show="calculations.total > 0">
          
           <router-link :to="{path:`/orderConfirmation/${shopId}`}">
               去结算
@@ -61,36 +62,20 @@
     </div>
     </div>
     </div>
+</div>
 </template>
 
 <script>
 import { computed,ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { useCommonCartEffect } from './commonCartEffect'
+import { useCommonCartEffect } from '../../effects/cartEffect'
 
 // 获取购物车信息逻辑
 const useCartEffect = (shopId)=>{
       const store = useStore()
-      const {cartList,changeCartItemInfo} = useCommonCartEffect()
-        const calculations = computed(()=>{
-            const productList = cartList[shopId]?.productList
-            const result = { total:0,price:0,allChecked:true}
-            if(productList){
-             for(let i in productList){
-                 const product = productList[i];
-                 result.total += product.count 
-                 if(product.check){
-                   result.price += (product.count * product.price)
-                 }
-                 if(product.count > 0 && !product.check){
-                   result.allChecked = false;
-                 }
-            }
-            }
-            result.price = result.price.toFixed(2)
-            return result
-        })
+      const {changeCartItemInfo,productList,calculations} = useCommonCartEffect(shopId)
+
             const allChecked = computed(()=>{
             const productList = cartList[shopId]?.productList
             let result = true
@@ -103,10 +88,7 @@ const useCartEffect = (shopId)=>{
             return result
         })
 
-        const productList = computed(()=>{
-            const productList = cartList[shopId]?.productList || []
-            return productList
-        })
+
         const changeCartItemChecked = (shopId,productId)=>{
                store.commit('changeCartItemChecked',{shopId,productId})
         }
@@ -190,7 +172,7 @@ export default {
             align-items: center;
             margin-right: .16rem;
             text-align: right;
-            line-height: 16px;
+            line-height: .16rem;
             &__btn{
                 display: inline-block;
             }
@@ -260,25 +242,12 @@ export default {
         position: absolute;
         right: 0rem;
         bottom: .12rem;
-        &__minus,&__plus{
-            display: inline-block;
-            width: .2rem;
-            height: .2rem;
-            line-height: .16rem;
-            border-radius: 50%;
-            border:.01rem solid $medium-fontColor;
-            font-size: .2rem;
-            text-align: center;
-
-        }
          &__minus{
-             border:.01rem solid $medium-fontColor;
              color: $medium-fontColor;
              margin-right: .05rem;
          }
         &__plus{
-            background: $btn-bgColor;
-            color: $bgColor;
+            color: $btn-bgColor;
             margin-left: .05rem;
         }
     
