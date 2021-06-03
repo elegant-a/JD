@@ -16,7 +16,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import { userRouter, useRouter, useRoute } from 'vue-router'
+import { useRouter,  useRoute } from 'vue-router'
 import { get } from '../../utils/request'
 import ShopInfo from '../../components/Shopinfo'
 import Content from './Content'

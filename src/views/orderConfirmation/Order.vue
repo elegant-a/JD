@@ -65,7 +65,6 @@ export default {
 
     setup(){
       const route = useRoute()
-     
       const shopId = parseInt(route.params.id)
       const { calculations,shopName,productList } = useCommonCartEffect(shopId)
       const { handleConfirmOrder } = useMakeOrderEffect(productList,shopName,shopId)

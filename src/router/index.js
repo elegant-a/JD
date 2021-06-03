@@ -4,6 +4,11 @@ import Login from '../views/login/Login.vue'
 
 const routes = [
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile_123" */ '../views/profile/Profile.vue')
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "home_123" */ '../views/home/Home.vue')
@@ -46,7 +51,6 @@ const routes = [
       isLogin ? next({name:'Home'}) :  next();
     }
   },
-
   // {
   //   path: '/about',
   //   name: 'About',

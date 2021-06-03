@@ -13,8 +13,8 @@ const getLocalCartList = ()=>{
   }catch(e){
     return{}
   }
-  
 }
+// VueX创建了一个全局唯一的仓库,用来存放全局的数据
 export default createStore({
   state: {
     cartList:getLocalCartList()

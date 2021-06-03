@@ -118,3 +118,119 @@ axios.post(url,data{
 写布局时,尽量由里向外面去撑布局
 如果出现裂图的问题，可以通过给组件添加 v-show="item.imgUrl"来避免这种情况的发生
 因为没有数据就不会展示
+
+box-shadow:x坐标值 y坐标值 模糊程度 颜色
+
+安装vue脚手架工具
+怎么用webpack对脚手架进行打包,脚手架里面都已经配置好了
+npm install -g @vue/cli
+vue create ....
+Manually select features
+(人工的去选择一些特性)
+Pick a linter / formatter config
+选择ESlint
+ESlint with error prevention only
+每一次保存时,做一下lint的校验
+
+Save this as a preset for future project(N)
+npm run serve 启动这个项目(中间有webpack帮我们打包这个项目)
+
+最为一个工程,源代码都放到src目录下
+父传子 子组件用props数组来接收父组件传递过来的参数,
+子传父 父组件需要通过componets对象来注册一下子组件
+
+ref,reactive 响应式的引用
+原理,通过Proxy对数据进行封装,当数据变化时,触发模板更新（也就是通过另一种方式实现了双向绑定）
+同时proxy,'dell'变成proxy({value:'dell'})这样的一个响应式引用
+调用值时,要使用name.value来调用
+return{name}
+
+ref是处理基础类型数据的方法
+reactive是处理对象,数组等复杂数据类型的函数
+处理之后数据就变成了动态响应，
+
+父组件向子组件传值的时候在子组件调用的标签上使用:msg 在子组件中使用props继续调用(单文件组件)
+路由是根据path路径不同展示不同的内容
+
+这种加载路由的方式被称懒加载,异步加载路由
+{
+    path:'/profile',
+    name:Profile,
+    component:()=> import('../views/profile/Profile.vue')
+}
+
+to是跳转到相应路径的名字
+<router-link to="/"></router-link>
+router-link是跳转路由的标签
+
+router-view 负责展示当前路由对应的组件内容
+
+VueX数据管理框架
+其中有state,mutations,actions,modules等属性
+
+store是全局的,任何地方都可以用它
+
+如想在组件 中调用
+{{myName}}
+export default{
+   name:'Home',
+   computed；{
+       myName(){
+           return this.$store.state.name
+       }
+   }
+}
+
+handleClick(){
+    this.$store.dispatch('change')
+    1.dispatch方法,派发一个action,名字叫做change
+    2.感知到change这个action,执行store中actions下面的change方法
+    3.commit 提交一个叫做 change 的数据改变
+    4.mutation 感知到提交的change改变,执行change方法
+
+    如果不需要异步操作,可以使用同步的commit方法操作
+    this.$store.commit('change')
+}
+
+mutations只允许有同步的操作,不能有异步的操作
+
+return this.$store.state.name
+       
+   change(state,str){
+       state.name = str;
+   }
+
+state:{}
+mutations:{}
+actions:{}
+
+import  { toRefs } from 'vue'
+import { useStore } from 'vuex';
+export default{
+    name:'Home',
+    setup(){
+        const store = useStore();
+        const {name} = toRefs(store.state);
+        return{
+            name
+        }
+    }
+}
+const handleClick = ()=>{
+    提交一个commit请求,在mutations里面直接响应
+    store.commit('changeName','hello')
+}
+
+axios使用axios发送ajax请求
+npm install axios
+引入axios 
+import axios from 'axios';
+
+axios.get('www.111111fastmock.com').then(
+    (response)=>{
+        const msg = response.data.message;
+        store.commit('changeName',msg)
+    }
+)
+
+})

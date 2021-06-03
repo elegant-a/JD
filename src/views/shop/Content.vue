@@ -81,7 +81,7 @@ const useCurrentListEffect = (currentTab, shopId) => {
 // 购物车相关逻辑
 const useCartEffect = () => {
         const store = useStore();
-  const { changeCartItemInfo, cartList } = useCommonCartEffect();
+   const { changeCartItemInfo, cartList } = useCommonCartEffect();
    const changeShopName = (shopId, shopName) => {
       store.commit("changeShopName", { shopId, shopName });
     };
@@ -103,7 +103,9 @@ export default {
     const shopId = route.params.id;
     const { currentTab, handleTabClick } = useTabEffect();
     const { list } = useCurrentListEffect(currentTab, shopId);
-    const {changeCartItem,cartList,getProductCartCount } = useCartEffect()
+
+    const { changeCartItem,cartList,getProductCartCount } = useCartEffect()
+
     return {
       currentTab,
       handleTabClick,
