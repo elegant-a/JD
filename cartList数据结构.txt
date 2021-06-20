@@ -1,6 +1,6 @@
  // 第一层级是商铺的ID
       /* shopId:{
-            shopName:'沃尔玛',
+          shopName:'沃尔玛',
           productList:{
           productId:{
           _id:'1',

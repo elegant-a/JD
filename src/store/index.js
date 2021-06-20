@@ -31,7 +31,8 @@ export default createStore({
         product.count = 0;
       }
       product.count = product.count + payload.num
-      if(payload.num > 0){
+    //如果商品的数量大于0,则商品为选中状态
+      if(product.count > 0){
         product.check = true;
       }
       if(product.count < 0){
@@ -53,7 +54,7 @@ export default createStore({
       setLoaclCartList(state)
     },
     setCartItemsChecked(state,payload){
-      const {shopId,} = payload
+      const {shopId} = payload
       const products = state.cartList[shopId].productList
       if(products){
         for(let key in products){

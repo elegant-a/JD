@@ -1,15 +1,15 @@
 <template>
 <div class="wrapper"> 
   <div class="CartList__header"><span class="CartList__header__details">我的全部购物车</span></div>
-  <div class="CartList__body">
-          <div class="products">
+  <div class="CartList__body" v-for="i in cartList" :key="i.shopName">
+  <div class="products" >
      <div class="products__title">
-       {{shopName}}
+       {{i.shopName}}
        </div>
        <div class="products__wrapper">
        <div class="products__list">
           <template
-            v-for="item in productList"
+            v-for="item in i.productList"
             :key="item._id">
             <div  class="products__item"
             v-if="item.count > 0"
@@ -31,13 +31,10 @@
             </div>
           </template>
           </div>
-           <div class="P_details"> 
-         共计10件/1.4KG
-       </div>
        </div>
    </div>
-  </div>
-  </div>
+</div>
+</div>
 
 <Docker :currentIndex="1"/>
 </template>
@@ -46,6 +43,7 @@
 // import ProductList from '../orderConfirmation/ProductList'
 import Docker from '../../components/Docker'
 import { get } from '../../utils/request'
+import { useStore } from 'vuex'
 //获取路由
 import { useRoute } from 'vue-router'
 import { useCommonCartEffect,shopName } from '../../effects/cartEffect'
@@ -54,10 +52,9 @@ export default {
     name:'CartList',
     components:{Docker},
     setup(){
-       const route = useRoute()
-      const shopId = 1
-      const { productList,shopName, } = useCommonCartEffect(shopId)
-      return { productList,shopName}
+       const store = useStore()
+       const  cartList = store.state.cartList;
+      return {cartList}
     }
 
 }

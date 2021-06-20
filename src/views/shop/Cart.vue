@@ -6,7 +6,7 @@
     <div class="container">
         <div class="product" v-if="showCart && calculations.total > 0">
         <div class="product__header">
-        <div class="product__header__all" @click="()=>setCartItemsChecked(shopId)">
+        <div class="product__header__all" @click="() => setCartItemsChecked(shopId)">
             <span 
             class="product__header__icon iconfont"
             v-html="calculations.allChecked ?'&#xe652;' :'&#xe619;'">
@@ -16,14 +16,15 @@
          <div class="product__header__clear"
          ><span class="product__header__clear__btn" @click="()=>cleanCartProducts(shopId)" >清空购物车</span></div>
             </div>
-
-             <div class="product__item"  v-for="(item) in productList" :key="item._id" >
+             <template v-for="(item) in productList" :key="item._id">
+             <div class="product__item" v-if="item.count > 0">
             <span 
             class="product__item__checked iconfont"
             v-html="item.check ?'&#xe652;':'&#xe619;'"
             @click="()=>changeCartItemChecked(shopId,item._id)"
             >
             </span>
+            
             <img class="product__item__img" :src="item.imgUrl" alt="">
             <div class="product__item__detail">
                 <h4 class="product__item__title">{{item.name}}</h4>
@@ -40,7 +41,8 @@
                @click="()=>{changeCartItemInfo(shopId,item._id,item,1)}"
                >&#xe92c;</span>
                 </div>
-             </div>
+                </div>
+             </template>
 
     </div>  
      <div class="check">
@@ -81,7 +83,7 @@ const useCartEffect = (shopId)=>{
             let result = true
             if(productList){
              for(let i in productList){
-                 const product = productList[i];
+                 const product = i;
 
             }
             }
@@ -125,6 +127,7 @@ export default {
     }
 
 }
+// productList[i]
 </script>
 
 <style lang="scss">

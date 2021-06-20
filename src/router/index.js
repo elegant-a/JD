@@ -67,6 +67,7 @@ const router = createRouter({
 })
 // 设置路由守卫
 router.beforeEach((to,from,next)=>{
+  //从localStorage里面取isLogin这个属性
   const { isLogin } = localStorage;
   // to对象下面的属性,Login
   // to.name
